@@ -3,6 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Page de documentation pour un style zotero pour le droit Suisse." />
+        <meta name="keywords" content="Droit, Suisse, Zotero, cls, xml" />
+        <meta name="author" content="Cindy Leschaud, @DesignPond" />
+        <meta http-equiv="Content-Language" content="fr-CH" />
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -173,10 +177,10 @@
 
 
                  <div class="description-wrap">
-                     <h3 class="description__title course-detail__title">Configurations</h3>
+                     <h3 class="description__title course-detail__title">Un style Zotero en bref</h3>
                      <div class="description__text">
 
-                         Si plusieurs auteurs limiter
+ {{--                        Si plusieurs auteurs limiter
                          Attributs “et-al-min” et “et-al-use-first”
 
                          Délimiteurs "et" ou "&"
@@ -188,32 +192,45 @@
                              <li> disambiguate-add-names="true"</li>
                              <li>disambiguate-add-givenname="true"</li>
                              <li>givenname-disambiguation-rule="primary-name"</li>
-                         </ul>
+                         </ul>--}}
 
 
                      </div>
                      <p>2 Blocs de style pour la blibliographie et les citations en bas de page:</p>
 <xmp style="font-weight: bold;">
 <citation>
-    <if type="article-journal" match="any">
+    <layout>
         <choose>
-            <if match="any" variable="author">
-                <text macro="author" />
+            <if type="book" match="any">
+                <choose>
+                    <if match="any" variable="title">
+                        <text variable="title" form="short" text-case="capitalize-first"  />
+                    </if>
+                </choose>
+                <choose>
+                    <if match="any" variable="URL">
+                        <text variable="number"  prefix=" "/>
+                    </if>
+                </choose>
             </if>
+            autres types de documents...
         </choose>
-    </if>
-    ...
+    </layout>
 </citation>
 
 <bibliography>
-    <if type="article-journal" match="any">
+    <layout>
         <choose>
-            <if match="any" variable="title">
-                <text variable="title" text-case="capitalize-first" />
+            <if type="book" match="any">
+                <choose>
+                    <if match="any" variable="title">
+                        <text variable="title" text-case="capitalize-first"  />
+                    </if>
+                </choose>
             </if>
+            autres types de documents...
         </choose>
-    </if>
-    ...
+    </layout>
 </bibliography>
 </xmp>
                  </div> <!-- end description-wrap -->
